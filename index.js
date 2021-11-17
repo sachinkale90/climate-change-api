@@ -2,6 +2,7 @@ const PORT = process.env.PORT || 8000
 const express = require('express')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const fs = require('fs');
 
 const app = express()
 const newspapers = [
@@ -95,7 +96,10 @@ newspapers.forEach(paper => {
 
 
 app.get('/', (req, res) => {
-    res.json('Welcome to my Climate Change News API')
+    res.writeHead(200, { 'Content-Type':'text/html'});
+    html = fs.readFileSync('./index.html');
+    //const html = '<h2>Welcome to my Climate Change News API</h2>'
+    res.end(html)
 })
 
 
